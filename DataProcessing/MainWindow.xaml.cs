@@ -20,9 +20,20 @@ namespace DataProcessing
     /// </summary>
     public partial class MainWindow : Window
     {
+        //Declaration Global Variables
+        public static LinkedList<double> SensorA = new LinkedList<double>();
+        public static LinkedList<double> SensorB = new LinkedList<double>();
+
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        //Load Data Method, po
+
+        public static void LoadData()
+        {
+
         }
     }
 }
