@@ -11,4 +11,10 @@
     <PackageReference Include="Extended.Wpf.Toolkit" Version="4.3.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="Galileo6">
+      <HintPath>D:\Murdoch Tafe\Complex Data Structures\AT 1\DataProcessing\DataProcessing\DataProcessing\Galileo6.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>
