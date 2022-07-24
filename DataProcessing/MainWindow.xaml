@@ -16,8 +16,8 @@
         <ListView Name="lstViewStaticDisplay" Margin="10,110,0,0" Width="180" HorizontalAlignment="Left" Height="446" VerticalAlignment="Top">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn x:Name="clmSensorA" Header="Sensor A" Width="95"/>
-                    <GridViewColumn x:Name="clmSensorB" Header="Sensor B" Width="95"/>
+                    <GridViewColumn x:Name="clmSensorA" Header="Sensor A" Width="95" DisplayMemberBinding="{Binding BindingGroupName=a}"/>
+                    <GridViewColumn x:Name="clmSensorB" Header="Sensor B" Width="95" DisplayMemberBinding="{Binding BindingGroupName=b}"/>
                 </GridView>
             </ListView.View>
         </ListView>
@@ -53,6 +53,8 @@
         <Label Content="Insertion Sort" HorizontalAlignment="Left" Margin="515,404,0,0" VerticalAlignment="Top"/>
         <Button x:Name="btnInsSortB" Content="Sort" HorizontalAlignment="Left" Margin="515,435,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="txtInsSortB" HorizontalAlignment="Left" Margin="515,460,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-        <Button x:Name="btnLoadData" Content="Load Data" HorizontalAlignment="Left" Margin="183,67,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="btnLoadData" Content="Load Data" HorizontalAlignment="Left" Margin="183,67,0,0" VerticalAlignment="Top" Click="btnLoadData_Click"/>
+        <Label Content="Counter" HorizontalAlignment="Left" Margin="219,519,0,0" VerticalAlignment="Top" x:Name="lblCounter"/>
+
     </Grid>
 </Window>
