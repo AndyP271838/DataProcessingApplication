@@ -13,12 +13,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-<<<<<<< Updated upstream
-=======
 using Galileo6;
 using DataProcessing.Test;
 using System.Reflection;
->>>>>>> Stashed changes
 
 namespace DataProcessing
 {
@@ -34,15 +31,14 @@ namespace DataProcessing
         public MainWindow()
         {
             InitializeComponent();
+            upDownMu.Text = "50";
+            upDownSig.Text = "10";
         }
 
         //Load Data Method, po
 
-        public static void LoadData()
+        public void LoadData()
         {
-<<<<<<< Updated upstream
-
-=======
             ReadData dataReader = new ReadData();
             for (int i = 0; i < 400; i++)
             {
@@ -55,7 +51,20 @@ namespace DataProcessing
         //Show all sensors method, display both LinkedLists in a ListView
         public void ShowAllSensorData()
         {
-            
+
+        }
+
+        //Temporary test method for data bindingfrom observable collection
+        private ObservableCollection<SensorRow> NewRow()
+        {
+            DataClass test = new DataClass(Double.Parse(upDownMu.Text), Double.Parse(upDownSig.Text));
+            ObservableCollection<SensorRow> result = new ObservableCollection<SensorRow>();
+
+            for (int a = 0; a < SensorA.Count; a++) 
+            {
+                result.Add(new SensorRow(test.SensorA.ElementAt(a), test.SensorB.ElementAt(a)));
+            }
+            return result;
         }
 
         //Call LoadData method, and ShowAllSensorData methods, no parameters
@@ -66,17 +75,15 @@ namespace DataProcessing
             LoadData();
             ShowAllSensorData();
             */
-    
-            DataClass test = new DataClass(Double.Parse(upDownMu.Text), Double.Parse(upDownSig.Text));
-            DataClassIEnumerable enumerable = new DataClassIEnumerable(test);
-            
-            lstViewStaticDisplay.ItemsSource = enumerable;
- 
-            lblCounter.Content = lstViewStaticDisplay.Items.Count.ToString();
->>>>>>> Stashed changes
-        }
 
-    
+            //DataClass test = new DataClass(Double.Parse(upDownMu.Text), Double.Parse(upDownSig.Text));
+            //DataClassIEnumerable enumerable = new DataClassIEnumerable(test);
+
+            //lstViewStaticDisplay.ItemsSource = enumerable;
+            ObservableCollection<SensorRow> columns = NewRow();
+            lstViewStaticDisplay.ItemsSource = columns;
+            lblCounter.Content = lstViewStaticDisplay.Items.Count.ToString();
+        }    
 
     }
 }
