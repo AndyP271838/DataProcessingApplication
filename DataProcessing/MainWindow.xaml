@@ -21,8 +21,8 @@
         <ListView Name="lstViewStaticDisplay" Margin="10,110,0,0" Width="180" HorizontalAlignment="Left" Height="446" VerticalAlignment="Top">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn x:Name="clmSensorA" Header="Sensor A" Width="95" DisplayMemberBinding="{Binding BindingGroupName=colA}"/>
-                    <GridViewColumn x:Name="clmSensorB" Header="Sensor B" Width="95" DisplayMemberBinding="{Binding BindingGroupName=colB}"/>
+                    <GridViewColumn x:Name="clmSensorA" Header="Sensor A" Width="95" DisplayMemberBinding="{Binding Path=[0]}"/>
+                    <GridViewColumn x:Name="clmSensorB" Header="Sensor B" Width="95" DisplayMemberBinding="{Binding Path=[1]}"/>
                 </GridView>
             </ListView.View>
         </ListView>
@@ -34,30 +34,30 @@
         <Label Content="Binary Search Recursive" HorizontalAlignment="Left" Margin="210,193,0,0" VerticalAlignment="Top"/>
         <Label Content="Search Target" HorizontalAlignment="Left" Margin="217,264,0,0" VerticalAlignment="Top"/>
         <Label Content="Selection Sort" HorizontalAlignment="Left" Margin="218,316,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="btnIterativeSearchA" Content="Search" HorizontalAlignment="Left" Margin="218,145,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="btnRecA" Content="Search" HorizontalAlignment="Left" Margin="218,219,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="txtIteA" HorizontalAlignment="Left" Margin="218,170,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="txtRecA" HorizontalAlignment="Left" Margin="218,244,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="txtSearchA" HorizontalAlignment="Left" Margin="219,289,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="79" Height="18"/>
-        <Button x:Name="btnSelSortA" Content="Sort" HorizontalAlignment="Left" Margin="218,347,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="txtSelSortA" HorizontalAlignment="Left" Margin="218,372,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <Button x:Name="btnIterativeSearchA" Content="Search" HorizontalAlignment="Left" Margin="218,145,0,0" VerticalAlignment="Top" Click="btnIterativeSearchA_Click"/>
+        <Button x:Name="btnRecA" Content="Search" HorizontalAlignment="Left" Margin="218,219,0,0" VerticalAlignment="Top" Click="btnRecA_Click"/>
+        <TextBox x:Name="txtIteA" HorizontalAlignment="Left" Margin="218,170,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsReadOnly="True" Text="0"/>
+        <TextBox x:Name="txtRecA" HorizontalAlignment="Left" Margin="218,244,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="120" IsReadOnly="True"/>
+        <TextBox x:Name="txtSearchA" HorizontalAlignment="Left" Margin="219,289,0,0" TextWrapping="Wrap" Text="Search" VerticalAlignment="Top" Width="79" Height="18" KeyDown="txtSearchA_KeyDown" PreviewTextInput="txtSearchA_PreviewTextInput" />
+        <Button x:Name="btnSelSortA" Content="Sort" HorizontalAlignment="Left" Margin="218,347,0,0" VerticalAlignment="Top" Click="btnSelSortA_Click"/>
+        <TextBox x:Name="txtSelSortA" HorizontalAlignment="Left" Margin="218,372,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="120" IsReadOnly="True"/>
         <Label Content="Insertion Sort" HorizontalAlignment="Left" Margin="218,404,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="btnInsSortA" Content="Sort" HorizontalAlignment="Left" Margin="218,435,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="txtInsSortA" HorizontalAlignment="Left" Margin="218,460,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <Button x:Name="btnInsSortA" Content="Sort" HorizontalAlignment="Left" Margin="218,435,0,0" VerticalAlignment="Top" Click="btnInsSortA_Click"/>
+        <TextBox x:Name="txtInsSortA" HorizontalAlignment="Left" Margin="218,460,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="120" IsReadOnly="True"/>
         <Label Content="Binary Search Iterative" HorizontalAlignment="Left" Margin="505,119,0,0" VerticalAlignment="Top"/>
         <Label Content="Binary Search Recursive" HorizontalAlignment="Left" Margin="505,193,0,0" VerticalAlignment="Top"/>
         <Label Content="Search Target" HorizontalAlignment="Left" Margin="515,265,0,0" VerticalAlignment="Top" Height="33" Width="81"/>
         <Label Content="Selection Sort" HorizontalAlignment="Left" Margin="515,316,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="btnIterativeSearchB" Content="Search" HorizontalAlignment="Left" Margin="515,145,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="btnRecB" Content="Search" HorizontalAlignment="Left" Margin="515,219,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="txtIteB" HorizontalAlignment="Left" Margin="515,170,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="txtRecB" HorizontalAlignment="Left" Margin="515,244,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="txtSearchB" HorizontalAlignment="Left" Margin="517,289,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="79" Height="18"/>
-        <Button x:Name="btnSelSortB" Content="Sort" HorizontalAlignment="Left" Margin="515,347,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="txtSelSortB" HorizontalAlignment="Left" Margin="515,372,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <Button x:Name="btnIterativeSearchB" Content="Search" HorizontalAlignment="Left" Margin="515,145,0,0" VerticalAlignment="Top" Click="btnIterativeSearchB_Click"/>
+        <Button x:Name="btnRecB" Content="Search" HorizontalAlignment="Left" Margin="515,219,0,0" VerticalAlignment="Top" Click="btnRecB_Click"/>
+        <TextBox x:Name="txtIteB" HorizontalAlignment="Left" Margin="515,170,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="120" IsReadOnly="True"/>
+        <TextBox x:Name="txtRecB" HorizontalAlignment="Left" Margin="515,244,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="120" IsReadOnly="True"/>
+        <TextBox x:Name="txtSearchB" HorizontalAlignment="Left" Margin="517,289,0,0" TextWrapping="Wrap" Text="Search" VerticalAlignment="Top" Width="79" Height="18"/>
+        <Button x:Name="btnSelSortB" Content="Sort" HorizontalAlignment="Left" Margin="515,347,0,0" VerticalAlignment="Top" Click="btnSelSortB_Click"/>
+        <TextBox x:Name="txtSelSortB" HorizontalAlignment="Left" Margin="515,372,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsReadOnly="True" Text="0"/>
         <Label Content="Insertion Sort" HorizontalAlignment="Left" Margin="515,404,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="btnInsSortB" Content="Sort" HorizontalAlignment="Left" Margin="515,435,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="txtInsSortB" HorizontalAlignment="Left" Margin="515,460,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <Button x:Name="btnInsSortB" Content="Sort" HorizontalAlignment="Left" Margin="515,435,0,0" VerticalAlignment="Top" Click="btnInsSortB_Click"/>
+        <TextBox x:Name="txtInsSortB" HorizontalAlignment="Left" Margin="515,460,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsReadOnly="True" Text="0"/>
         <Button x:Name="btnLoadData" Content="Load Data" HorizontalAlignment="Left" Margin="183,67,0,0" VerticalAlignment="Top" Click="btnLoadData_Click"/>
         <Label Content="Counter" HorizontalAlignment="Left" Margin="219,519,0,0" VerticalAlignment="Top" x:Name="lblCounter"/>
     </Grid>
