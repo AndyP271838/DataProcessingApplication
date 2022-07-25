@@ -10,9 +10,15 @@
     <Grid MinWidth="800" MinHeight="583">
         <Label x:Name="lblSigma" Content="Sigma" HorizontalAlignment="Left" Margin="41,21,0,0" VerticalAlignment="Top"/>
         <Label x:Name="lblMu" Content="Mu" HorizontalAlignment="Left" Margin="108,21,0,0" VerticalAlignment="Top"/>
+<!--
         <xctk:IntegerUpDown Name="upDownSig" Margin="27,60,0,0" HorizontalAlignment="Left" Width="61" Height="33" VerticalAlignment="Top" Maximum="20" Minimum="10"/>
         <xctk:IntegerUpDown Name="upDownMu" Margin="93,60,0,0" HorizontalAlignment="Left" Width="57" Height="33" VerticalAlignment="Top" Maximum="75" Minimum="35"/>
         <ListView x:Name="lstViewStaticDisplay" Margin="10,110,0,0" Width="180" HorizontalAlignment="Left" Height="446" VerticalAlignment="Top">
+-->
+        <xctk:IntegerUpDown x:Name="upDownSig" Margin="27,60,0,0" HorizontalAlignment="Left" Width="61" Height="33" VerticalAlignment="Top" DefaultValue="10" Maximum="20" Minimum="10" />
+        <xctk:IntegerUpDown x:Name="upDownMu" Margin="93,60,0,0" HorizontalAlignment="Left" Width="57" Height="33" VerticalAlignment="Top" DefaultValue="50" Maximum="75" Minimum="35" />
+        <!--List View for both-->
+        <ListView Name="lstViewStaticDisplay" Margin="10,110,0,0" Width="180" HorizontalAlignment="Left" Height="446" VerticalAlignment="Top">
             <ListView.View>
                 <GridView>
                     <GridViewColumn x:Name="clmSensorA" Header="Sensor A" Width="95" DisplayMemberBinding="{Binding BindingGroupName=colA}"/>

@@ -17,6 +17,7 @@ using Galileo6;
 using DataProcessing.Test;
 using System.Reflection;
 
+
 namespace DataProcessing
 {
     /// <summary>
@@ -35,7 +36,7 @@ namespace DataProcessing
             upDownSig.Text = "10";
         }
 
-        //Load Data Method, po
+        //Load Data Method, return void no solution, uses loop to populate linked list to size not greater than 400
 
         public void LoadData()
         {
@@ -46,6 +47,26 @@ namespace DataProcessing
                 SensorB.AddFirst(dataReader.SensorB(Double.Parse(upDownMu.Text), Double.Parse(upDownSig.Text)));
             }
 
+
+        //Show all sensors method, display both LinkedLists in a ListView
+        public void ShowAllSensorData()
+        {
+            lstViewStaticDisplay.Items.Add(item);
+            //ListViewItem
+            //lstViewStaticDisplay.
+            //for (int i = 0; i < SensorA.Count; i++)
+            //{
+            //    ListViewItem item = new ListViewItem();
+            //    item.Content = SensorA;
+            //    lstViewStaticDisplay.Items.Add(new ListViewItem());
+            //}
+        }
+
+        //Call LoadData method, and ShowAllSensorData methods, no parameters
+        private void btnLoadData_Click(object sender, RoutedEventArgs e)
+        {
+            LoadData();
+            ShowAllSensorData();
         }
 
         //Show all sensors method, display both LinkedLists in a ListView
@@ -75,6 +96,16 @@ namespace DataProcessing
             LoadData();
             ShowAllSensorData();
             */
+/*
+    
+            DataClass test = new DataClass(Double.Parse(upDownMu.Text), Double.Parse(upDownSig.Text));
+            DataClassIEnumerable enumerable = new DataClassIEnumerable(test);
+            
+            lstViewStaticDisplay.ItemsSource = enumerable;
+ 
+            lblCounter.Content = lstViewStaticDisplay.Items.Count.ToString();
+        }
+*/
 
             //DataClass test = new DataClass(Double.Parse(upDownMu.Text), Double.Parse(upDownSig.Text));
             //DataClassIEnumerable enumerable = new DataClassIEnumerable(test);
