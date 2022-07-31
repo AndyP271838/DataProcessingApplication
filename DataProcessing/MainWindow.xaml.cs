@@ -39,11 +39,13 @@ namespace DataProcessing
         #region Methods
         public void LoadData()
         {
+            int dataSet = 400;
+
             SensorA.Clear();
             SensorB.Clear();
 
             ReadData dataReader = new ReadData();
-            for (int i = 0; i < 400; i++)
+            for (int i = 0; i < dataSet; i++)                                               //FOR TEST PURPOSES modify 400 to 10
             {
                 SensorA.AddFirst(dataReader.SensorA(Double.Parse(upDownMu.Text), Double.Parse(upDownSig.Text)));
                 SensorB.AddFirst(dataReader.SensorB(Double.Parse(upDownMu.Text), Double.Parse(upDownSig.Text)));
@@ -56,7 +58,6 @@ namespace DataProcessing
             for (int a = 0; a < SensorA.Count; a++)
             {
                 lstViewStaticDisplay.Items.Add(NewRow(a));
-                lstViewStaticDisplay.Items.Add(new String[2] {SensorA.ElementAt(a).ToString(), SensorA.ElementAt(a).ToString()});
             }
         }
 
@@ -89,8 +90,6 @@ namespace DataProcessing
         //Selection Sort Method
         public bool SelectionSort(LinkedList<double> mLink)
         {
-            //bool result = true;
-
             int min = 0;
             int max = NumberOfNodes(mLink);
 
@@ -126,14 +125,13 @@ namespace DataProcessing
             {
                 for (int j = i + 1; j > 0; j--)
                 {
-                    if (mLink.ElementAt(j-1) > mLink.ElementAt(j))                          //Not sure if done correctly
+                    if (mLink.ElementAt(j-1) > mLink.ElementAt(j))
                     {
                         LinkedListNode<double> current = mLink.Find(mLink.ElementAt(j));
                         LinkedListNode<double> previous = mLink.Find(mLink.ElementAt(j - 1));
                         double temp = current.Value;
                         current.Value = previous.Value;
                         previous.Value = temp;
-                        
                     }
                 }
             }
@@ -150,7 +148,7 @@ namespace DataProcessing
 
                 if (searchValue.Equals(mLink.ElementAt(middle)))
                 {
-                    return ++middle;
+                    return middle;      //Removed ++middle, cheaky trick
                 }
                 else if (searchValue < mLink.ElementAt(middle))
                 {
@@ -164,6 +162,7 @@ namespace DataProcessing
             return minimum;
         }
 
+        //Recursive Binary Search Method
         public int BinarySearchRecursive(LinkedList<double> mLink, double searchValue, int minimum, int maximum)
         {
             if (minimum <= maximum -1)
@@ -206,32 +205,46 @@ namespace DataProcessing
         //Sensor A Iterative Search
         private void btnIterativeSearchA_Click(object sender, RoutedEventArgs e)
         {
-            if (SelectionSort(SensorA))
+            if (SensorA.Contains(Double.Parse(txtIteA.Text)))
             {
-                lstBoxSensA.Items.Clear();
-                Stopwatch sw = Stopwatch.StartNew();
-                int result = BinarySearchIterative(SensorA, Double.Parse(txtSearchA.Text), 0, NumberOfNodes(SensorA));
-                sw.Stop();
-                txtIteA.Text = sw.Elapsed.Ticks.ToString();
-                DisplayListBoxData(SensorA, lstBoxSensA);
-                lstBoxSensA.SelectedIndex = result;
-                lstBoxSensA.Focus();
+                if (SelectionSort(SensorA))
+                {
+                    lstBoxSensA.Items.Clear();
+                    Stopwatch sw = Stopwatch.StartNew();
+                    int result = BinarySearchIterative(SensorA, Double.Parse(txtSearchA.Text), 0, NumberOfNodes(SensorA));
+                    sw.Stop();
+                    txtIteA.Text = sw.Elapsed.Ticks.ToString();
+                    DisplayListBoxData(SensorA, lstBoxSensA);
+                    lstBoxSensA.SelectedIndex = result;
+                    lstBoxSensA.Focus();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Target not found!");
             }
         }
 
         //Sensor A Recursive search
         private void btnRecA_Click(object sender, RoutedEventArgs e)
         {
-            if (SelectionSort(SensorA))
+            if (SensorA.Contains(Double.Parse(txtRecA.Text)))
             {
-                lstBoxSensA.Items.Clear();
-                Stopwatch sw = Stopwatch.StartNew();
-                int result = BinarySearchRecursive(SensorA, Double.Parse(txtSearchA.Text), 0, NumberOfNodes(SensorA));
-                sw.Stop();
-                txtRecA.Text = sw.Elapsed.Ticks.ToString();
-                DisplayListBoxData(SensorA, lstBoxSensA);
-                lstBoxSensA.SelectedIndex = result;
-                lstBoxSensA.Focus();
+                if (SelectionSort(SensorA))
+                {
+                    lstBoxSensA.Items.Clear();
+                    Stopwatch sw = Stopwatch.StartNew();
+                    int result = BinarySearchRecursive(SensorA, Double.Parse(txtSearchA.Text), 0, NumberOfNodes(SensorA));
+                    sw.Stop();
+                    txtRecA.Text = sw.Elapsed.Ticks.ToString();
+                    DisplayListBoxData(SensorA, lstBoxSensA);
+                    lstBoxSensA.SelectedIndex = result;
+                    lstBoxSensA.Focus();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Target not found!");
             }
         }
 
@@ -263,32 +276,46 @@ namespace DataProcessing
         //Sensor B Iterative Search
         private void btnIterativeSearchB_Click(object sender, RoutedEventArgs e)
         {
-            if (SelectionSort(SensorB))
+            if (SensorA.Contains(Double.Parse(txtIteB.Text)))
             {
-                lstBoxSensB.Items.Clear();
-                Stopwatch sw = Stopwatch.StartNew();
-                int result = BinarySearchIterative(SensorB, Double.Parse(txtSearchB.Text), 0, NumberOfNodes(SensorB));   //What are minimum and maximum, they are int, so probably index
-                sw.Stop();
-                txtIteB.Text = sw.Elapsed.Ticks.ToString();
-                DisplayListBoxData(SensorB, lstBoxSensB);
-                lstBoxSensB.SelectedIndex = result;
-                lstBoxSensB.Focus();
+                if (SelectionSort(SensorB))
+                {
+                    lstBoxSensB.Items.Clear();
+                    Stopwatch sw = Stopwatch.StartNew();
+                    int result = BinarySearchIterative(SensorB, Double.Parse(txtSearchB.Text), 0, NumberOfNodes(SensorB));   //What are minimum and maximum, they are int, so probably index
+                    sw.Stop();
+                    txtIteB.Text = sw.Elapsed.Ticks.ToString();
+                    DisplayListBoxData(SensorB, lstBoxSensB);
+                    lstBoxSensB.SelectedIndex = result;
+                    lstBoxSensB.Focus();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Target not found!");
             }
         }
 
         //Sensor B recursive search
         private void btnRecB_Click(object sender, RoutedEventArgs e)
         {
-            if (SelectionSort(SensorB))
+            if (SensorA.Contains(Double.Parse(txtRecB.Text)))
             {
-                lstBoxSensB.Items.Clear();
-                Stopwatch sw = Stopwatch.StartNew();
-                int result = BinarySearchRecursive(SensorB, Double.Parse(txtSearchB.Text), 0, NumberOfNodes(SensorB));
-                sw.Stop();
-                txtRecB.Text = sw.Elapsed.Ticks.ToString();
-                DisplayListBoxData(SensorB, lstBoxSensB);
-                lstBoxSensB.SelectedIndex = result;
-                lstBoxSensB.Focus();
+                if (SelectionSort(SensorB))
+                {
+                    lstBoxSensB.Items.Clear();
+                    Stopwatch sw = Stopwatch.StartNew();
+                    int result = BinarySearchRecursive(SensorB, Double.Parse(txtSearchB.Text), 0, NumberOfNodes(SensorB));
+                    sw.Stop();
+                    txtRecB.Text = sw.Elapsed.Ticks.ToString();
+                    DisplayListBoxData(SensorB, lstBoxSensB);
+                    lstBoxSensB.SelectedIndex = result;
+                    lstBoxSensB.Focus();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Target not found!");
             }
         }
 
