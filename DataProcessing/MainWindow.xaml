@@ -26,8 +26,8 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <ListBox Name ="lstBoxSensA" Margin="336,106,0,0" Width="157" HorizontalAlignment="Left" Height="446" VerticalAlignment="Top"/>
-        <ListBox Name ="lstBoxSensB" Margin="633,106,0,0" Width="150" HorizontalAlignment="Left" Height="446" VerticalAlignment="Top"/>
+        <ListBox Name ="lstBoxSensA" Margin="336,106,0,0" Width="157" HorizontalAlignment="Left" Height="446" VerticalAlignment="Top" SelectionMode="Multiple"/>
+        <ListBox Name ="lstBoxSensB" Margin="633,106,0,0" Width="150" HorizontalAlignment="Left" Height="446" VerticalAlignment="Top" SelectionMode="Multiple"/>
         <Label x:Name="lblSensorA" Content="Sensor A" HorizontalAlignment="Left" Margin="390,43,0,0" VerticalAlignment="Top"/>
         <Label Content="Sensor B" HorizontalAlignment="Left" Margin="687,43,0,0" VerticalAlignment="Top"/>
         <Label Content="Binary Search Iterative" HorizontalAlignment="Left" Margin="204,115,0,0" VerticalAlignment="Top"/>
@@ -38,7 +38,7 @@
         <Button x:Name="btnRecA" Content="Search" HorizontalAlignment="Left" Margin="211,215,0,0" VerticalAlignment="Top" Click="btnRecA_Click"/>
         <TextBox x:Name="txtIteA" HorizontalAlignment="Left" Margin="211,166,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsReadOnly="True" Text="0"/>
         <TextBox x:Name="txtRecA" HorizontalAlignment="Left" Margin="211,240,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="120" IsReadOnly="True"/>
-        <TextBox x:Name="txtSearchA" HorizontalAlignment="Left" Margin="212,285,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="79" Height="18" KeyDown="txtSearchA_KeyDown" PreviewTextInput="txtSearchA_PreviewTextInput" />
+        <TextBox x:Name="txtSearchA" HorizontalAlignment="Left" Margin="212,285,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="79" Height="18" PreviewTextInput="txtSearchA_PreviewTextInput"/>
         <Button x:Name="btnSelSortA" Content="Sort" HorizontalAlignment="Left" Margin="211,343,0,0" VerticalAlignment="Top" Click="btnSelSortA_Click"/>
         <TextBox x:Name="txtSelSortA" HorizontalAlignment="Left" Margin="211,368,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="120" IsReadOnly="True"/>
         <Label Content="Insertion Sort" HorizontalAlignment="Left" Margin="211,400,0,0" VerticalAlignment="Top"/>
@@ -52,13 +52,12 @@
         <Button x:Name="btnRecB" Content="Search" HorizontalAlignment="Left" Margin="508,215,0,0" VerticalAlignment="Top" Click="btnRecB_Click"/>
         <TextBox x:Name="txtIteB" HorizontalAlignment="Left" Margin="508,166,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="120" IsReadOnly="True"/>
         <TextBox x:Name="txtRecB" HorizontalAlignment="Left" Margin="508,240,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="120" IsReadOnly="True"/>
-        <TextBox x:Name="txtSearchB" HorizontalAlignment="Left" Margin="510,285,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="79" Height="18"/>
+        <TextBox x:Name="txtSearchB" HorizontalAlignment="Left" Margin="510,285,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="79" Height="18" PreviewTextInput="txtSearchB_PreviewTextInput"/>
         <Button x:Name="btnSelSortB" Content="Sort" HorizontalAlignment="Left" Margin="508,343,0,0" VerticalAlignment="Top" Click="btnSelSortB_Click"/>
         <TextBox x:Name="txtSelSortB" HorizontalAlignment="Left" Margin="508,368,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsReadOnly="True" Text="0"/>
         <Label Content="Insertion Sort" HorizontalAlignment="Left" Margin="508,400,0,0" VerticalAlignment="Top"/>
         <Button x:Name="btnInsSortB" Content="Sort" HorizontalAlignment="Left" Margin="508,431,0,0" VerticalAlignment="Top" Click="btnInsSortB_Click"/>
         <TextBox x:Name="txtInsSortB" HorizontalAlignment="Left" Margin="508,456,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsReadOnly="True" Text="0"/>
         <Button x:Name="btnLoadData" Content="Load Data" HorizontalAlignment="Left" Margin="183,67,0,0" VerticalAlignment="Top" Click="btnLoadData_Click"/>
-        <Label Content="Counter" HorizontalAlignment="Left" Margin="212,515,0,0" VerticalAlignment="Top" x:Name="lblCounter"/>
     </Grid>
 </Window>

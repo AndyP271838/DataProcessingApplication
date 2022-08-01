@@ -146,7 +146,7 @@ namespace DataProcessing
             {
                 int middle = (minimum + maximum) / 2 ;
 
-                if (searchValue.Equals(mLink.ElementAt(middle)))
+                if (searchValue.Equals(mLink.ElementAt(middle)))    //Convert Double to Int in line
                 {
                     return middle;      //Removed ++middle, cheaky trick
                 }
@@ -168,11 +168,11 @@ namespace DataProcessing
             if (minimum <= maximum -1)
             {
                 int middle = (minimum + maximum) / 2;
-                if (searchValue.Equals(mLink.ElementAt(middle)))
+                if (searchValue.Equals(mLink.ElementAt(middle)))    //Convert Double to Int in line
                 {
                     return middle;
                 }
-                else if (searchValue < mLink.ElementAt(middle))
+                else if (searchValue < mLink.ElementAt(middle))     //Convert Double to Int in line
                 {
                     return BinarySearchRecursive(mLink, searchValue, minimum, middle - 1);
                 }
@@ -183,6 +183,44 @@ namespace DataProcessing
             }
 
             return minimum;
+        }
+
+        //Select's Data in a Range from the List Box
+        public void SelectData(ListBox myBox, int result)
+        {
+            myBox.SelectedItems.Clear();
+            //Select Rows Below Search Resutl
+            for (int a = 0; a < 3; a++)
+            {
+                //Rows Above
+                if ((result - a) > -1)
+                {
+                    myBox.SelectedItems.Add(myBox.Items[result - a]);
+                }
+            }
+            myBox.SelectedItems.Add(result);
+            for (int a = 0; a < 3; a++)
+            {
+                //Rows Below
+                if ((result + a) <= myBox.Items.Count - 1)
+                {
+                    myBox.SelectedItems.Add(myBox.Items[result + a]);
+                }
+            }
+        }
+
+        //Returns a boolean, checks if the value entered into the search boc is out of range
+        public bool RangeCheck(LinkedList<double> myList, double input)
+        {
+            if (input <= myList.Max() && input >= myList.Min())
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
         }
             #endregion
         #endregion
@@ -197,54 +235,71 @@ namespace DataProcessing
             ShowAllSensorData();
             DisplayListBoxData(SensorA, lstBoxSensA);
             DisplayListBoxData(SensorB, lstBoxSensB);
-
-            //Testing only
-            lblCounter.Content = lstViewStaticDisplay.Items.Count.ToString();
         }
         
         //Sensor A Iterative Search
         private void btnIterativeSearchA_Click(object sender, RoutedEventArgs e)
         {
-            if (SensorA.Contains(Double.Parse(txtIteA.Text)))
+            if (!String.IsNullOrEmpty(txtSearchA.Text))
             {
-                if (SelectionSort(SensorA))
+                if (SelectionSort(SensorA) && RangeCheck(SensorA, Double.Parse(txtSearchA.Text)))
                 {
                     lstBoxSensA.Items.Clear();
                     Stopwatch sw = Stopwatch.StartNew();
                     int result = BinarySearchIterative(SensorA, Double.Parse(txtSearchA.Text), 0, NumberOfNodes(SensorA));
                     sw.Stop();
-                    txtIteA.Text = sw.Elapsed.Ticks.ToString();
+                    txtIteA.Text = String.Format("{0} Ticks", sw.Elapsed.Ticks.ToString()); // Should be ticks
                     DisplayListBoxData(SensorA, lstBoxSensA);
-                    lstBoxSensA.SelectedIndex = result;
+                    SelectData(lstBoxSensA, result);
+
+                    //User Feedback
                     lstBoxSensA.Focus();
+                    lstBoxSensA.ScrollIntoView(lstBoxSensA.SelectedItems[lstBoxSensA.SelectedItems.Count - 1]);
+                    lstBoxSensA.ScrollIntoView(lstBoxSensA.SelectedItems[0]);
+                }
+                else
+                {
+                    MessageBox.Show("Search value outside range of dataset");
                 }
             }
             else
             {
-                MessageBox.Show("Target not found!");
+                MessageBox.Show("Search Field is Empty");
+                txtSearchA.Focus();
             }
+
         }
 
         //Sensor A Recursive search
         private void btnRecA_Click(object sender, RoutedEventArgs e)
         {
-            if (SensorA.Contains(Double.Parse(txtRecA.Text)))
+            if (!String.IsNullOrEmpty(txtSearchA.Text))
             {
-                if (SelectionSort(SensorA))
+                if (SelectionSort(SensorA) && RangeCheck(SensorA, Double.Parse(txtSearchA.Text)))
                 {
                     lstBoxSensA.Items.Clear();
                     Stopwatch sw = Stopwatch.StartNew();
                     int result = BinarySearchRecursive(SensorA, Double.Parse(txtSearchA.Text), 0, NumberOfNodes(SensorA));
                     sw.Stop();
-                    txtRecA.Text = sw.Elapsed.Ticks.ToString();
+
+                    txtRecA.Text = String.Format("{0} Ticks", sw.Elapsed.Ticks.ToString());
                     DisplayListBoxData(SensorA, lstBoxSensA);
-                    lstBoxSensA.SelectedIndex = result;
+                    SelectData(lstBoxSensA, result);
+
+                    //User Feedback
                     lstBoxSensA.Focus();
+                    lstBoxSensA.ScrollIntoView(lstBoxSensA.SelectedItems[lstBoxSensA.SelectedItems.Count - 1]);
+                    lstBoxSensA.ScrollIntoView(lstBoxSensA.SelectedItems[0]);
+                }
+                else
+                {
+                    MessageBox.Show("Search value outside range of dataset");
                 }
             }
             else
             {
-                MessageBox.Show("Target not found!");
+                MessageBox.Show("Search Field is Empty");
+                txtSearchA.Focus();
             }
         }
 
@@ -255,7 +310,7 @@ namespace DataProcessing
             Stopwatch sw = Stopwatch.StartNew();
             SelectionSort(SensorA);
             sw.Stop();
-            txtSelSortA.Text = sw.ElapsedMilliseconds.ToString();
+            txtSelSortA.Text = String.Format("{0} Milliseconds", sw.Elapsed.Milliseconds.ToString());
             ShowAllSensorData();
             DisplayListBoxData(SensorA, lstBoxSensA);
             
@@ -268,7 +323,7 @@ namespace DataProcessing
             Stopwatch sw = Stopwatch.StartNew();
             InsertionSort(SensorA);
             sw.Stop();
-            txtInsSortA.Text = sw.ElapsedMilliseconds.ToString();
+            txtInsSortA.Text = String.Format("{0} Milliseconds", sw.Elapsed.Milliseconds.ToString());
             ShowAllSensorData();
             DisplayListBoxData(SensorA, lstBoxSensA);
         }
@@ -276,46 +331,64 @@ namespace DataProcessing
         //Sensor B Iterative Search
         private void btnIterativeSearchB_Click(object sender, RoutedEventArgs e)
         {
-            if (SensorA.Contains(Double.Parse(txtIteB.Text)))
+            if (!String.IsNullOrEmpty(txtSearchB.Text))
             {
-                if (SelectionSort(SensorB))
+                if (SelectionSort(SensorB) && RangeCheck(SensorB, Double.Parse(txtSearchB.Text)))
                 {
                     lstBoxSensB.Items.Clear();
                     Stopwatch sw = Stopwatch.StartNew();
-                    int result = BinarySearchIterative(SensorB, Double.Parse(txtSearchB.Text), 0, NumberOfNodes(SensorB));   //What are minimum and maximum, they are int, so probably index
+                    int result = BinarySearchIterative(SensorB, Double.Parse(txtSearchB.Text), 0, NumberOfNodes(SensorB));
                     sw.Stop();
-                    txtIteB.Text = sw.Elapsed.Ticks.ToString();
+                    txtIteB.Text = String.Format("{0} Ticks", sw.Elapsed.Ticks.ToString());
                     DisplayListBoxData(SensorB, lstBoxSensB);
-                    lstBoxSensB.SelectedIndex = result;
+                    SelectData(lstBoxSensB, result);
+                    
+                    //User Feedback
                     lstBoxSensB.Focus();
+                    lstBoxSensB.ScrollIntoView(lstBoxSensB.SelectedItems[lstBoxSensB.SelectedItems.Count - 1]);
+                    lstBoxSensB.ScrollIntoView(lstBoxSensB.SelectedItems[0]);
+                }
+                else
+                {
+                    MessageBox.Show("Search value outside range of dataset!");
                 }
             }
             else
             {
-                MessageBox.Show("Target not found!");
+                MessageBox.Show("Search Field is Empty");
+                txtSearchB.Focus();
             }
         }
 
         //Sensor B recursive search
         private void btnRecB_Click(object sender, RoutedEventArgs e)
         {
-            if (SensorA.Contains(Double.Parse(txtRecB.Text)))
+            if (!String.IsNullOrEmpty(txtSearchB.Text))
             {
-                if (SelectionSort(SensorB))
+                if (SelectionSort(SensorB) && RangeCheck(SensorB, Double.Parse(txtSearchB.Text)))
                 {
                     lstBoxSensB.Items.Clear();
                     Stopwatch sw = Stopwatch.StartNew();
                     int result = BinarySearchRecursive(SensorB, Double.Parse(txtSearchB.Text), 0, NumberOfNodes(SensorB));
                     sw.Stop();
-                    txtRecB.Text = sw.Elapsed.Ticks.ToString();
+                    txtRecB.Text = String.Format("{0} Ticks", sw.Elapsed.Ticks.ToString());
                     DisplayListBoxData(SensorB, lstBoxSensB);
-                    lstBoxSensB.SelectedIndex = result;
+                    SelectData(lstBoxSensB, result);
+
+                    //User Feedback
                     lstBoxSensB.Focus();
+                    lstBoxSensB.ScrollIntoView(lstBoxSensB.SelectedItems[lstBoxSensB.SelectedItems.Count-1]);
+                    lstBoxSensB.ScrollIntoView(lstBoxSensB.SelectedItems[0]);
+                }
+                else
+                {
+                    MessageBox.Show("Search value outside range of dataset!");
                 }
             }
             else
             {
-                MessageBox.Show("Target not found!");
+                MessageBox.Show("Search Field is Empty");
+                txtSearchB.Focus();
             }
         }
 
@@ -326,7 +399,7 @@ namespace DataProcessing
             Stopwatch sw = Stopwatch.StartNew();
             SelectionSort(SensorB);
             sw.Stop();
-            txtSelSortB.Text = sw.ElapsedMilliseconds.ToString();
+            txtSelSortB.Text = String.Format("{0} Milliseconds", sw.Elapsed.Milliseconds.ToString());
             ShowAllSensorData();
             DisplayListBoxData(SensorB, lstBoxSensB);
         }
@@ -338,24 +411,12 @@ namespace DataProcessing
             Stopwatch sw = Stopwatch.StartNew();
             InsertionSort(SensorB);
             sw.Stop();
-            txtInsSortB.Text = sw.ElapsedMilliseconds.ToString();
+            txtInsSortB.Text = String.Format("{0} Milliseconds", sw.Elapsed.Milliseconds.ToString());
             ShowAllSensorData();
             DisplayListBoxData(SensorB, lstBoxSensB);
         }
 
-        private void txtSearchA_KeyDown(object sender, KeyEventArgs e)
-        {     
-            //Key.Decimal
-            //if ((e.Key >= Key.D0 && e.Key <= Key.D9) || e.Key == Key.Back || e.Key == Key.Decimal || e.Key == Key.Left || e.Key == Key.Right)
-            //{
-            //    e.Handled = false;
-            //}
-            //else
-            //{
-            //    e.Handled = true;
-            //}
-        }
-
+        //Event Handler for input type in Search A Text Box Input
         private void txtSearchA_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             if (e.Text.CompareTo(".") == 0)
@@ -363,6 +424,23 @@ namespace DataProcessing
                 e.Handled = false;
             }
             else if (Double.TryParse(e.Text,out  double input))
+            {
+                e.Handled = false;
+            }
+            else
+            {
+                e.Handled = true;
+            }
+        }
+
+        //Event Handler for input type in Search A Text Box Input
+        private void txtSearchB_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            if (e.Text.CompareTo(".") == 0)
+            {
+                e.Handled = false;
+            }
+            else if (Double.TryParse(e.Text, out double input))
             {
                 e.Handled = false;
             }
